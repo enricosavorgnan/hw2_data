@@ -1,0 +1,178 @@
+MSSubClass: 		QL
+
+MSZoning:		QL
+	
+LotFrontage:		QTC
+
+LotArea:		QTC
+
+Street: 		QL
+       	
+Alley: 			QL		X
+		
+LotShape: 		QL
+       
+LandContour: 		QL
+		
+Utilities: 		QL	
+	
+LotConfig: 		QL
+	
+LandSlope:		QL
+	
+Neighborhood: 		QL
+
+Condition1: 		QL
+	
+Condition2: 		QL
+	
+BldgType:		QL
+	
+HouseStyle: 		QL
+	
+OverallQual: 		QTDS
+	
+OverallCond: 		QTDS
+		
+YearBuilt: 		QTA
+
+YearRemodAdd:		QTA
+
+RoofStyle: 		QL
+		
+RoofMatl: 		QL
+		
+Exterior1st: 		QL
+	
+Exterior2nd: 		QL
+	
+MasVnrType: 		QL
+	
+MasVnrArea: 		QTC0
+
+ExterQual: 		QL
+		
+ExterCond: 		QL
+		
+Foundation:		QL
+		
+BsmtQual: 		QL
+		
+BsmtCond: 		QL
+	
+BsmtExposure: 		QL
+	
+BsmtFinType1: 		QL
+		
+BsmtFinSF1: 		QTC0
+
+BsmtFinType2: 		QL
+
+BsmtFinSF2: 		QTC0
+
+BsmtUnfSF:		QTC0 
+
+TotalBsmtSF: 		QTC
+
+Heating: 		QL 
+		
+HeatingQC: 		QL
+		
+CentralAir: 		QL
+
+Electrical: 		QL 
+		
+1stFlrSF: 		QTC0
+ 
+2ndFlrSF: 		QTC0
+
+LowQualFinSF:		QTC0
+
+GrLivArea:		QTC0
+
+BsmtFullBath:		QTD
+
+BsmtHalfBath: 		QTD
+
+FullBath: 		QTD
+
+HalfBath: 		QTD
+
+Bedroom: 		QTD
+
+Kitchen:		QTD
+
+KitchenQual: 		QL
+       	
+TotRmsAbvGrd: 		QTD
+
+Functional:		QL
+		
+Fireplaces: 		QTD		
+	
+FireplaceQu: 		QL		
+		
+GarageType: 		QL
+		
+GarageYrBlt: 		QTA
+		
+GarageFinish: 		QL
+		
+GarageCars: 		QTD
+
+GarageArea: 		QTC0
+
+GarageQual: 		QL
+		
+GarageCond: 		QL
+		
+PavedDrive: 		QL
+
+WoodDeckSF: 		QTC0
+
+OpenPorchSF: 		QTC0
+
+EnclosedPorch: 		QTC0
+
+3SsnPorch: 		QTC0
+
+ScreenPorch: 		QTC0
+
+PoolArea: 		QTC0		X
+
+PoolQC: 		QL		X
+		
+Fence: 			QL		X
+	
+MiscFeature: 		QL		X
+		
+MiscVal: 		QTC		X
+
+MoSold: 		QTA
+
+YrSold: 		QTA
+
+SaleType: 		QL
+		
+SaleCondition: 		QL
+
+
+
+
+
+
+
+
+Per gli anni: 
+- Moda
+- Quartili
+- Min max
+- Istogramma di 10 anni in 10
+
+Per i voti:
+
+
+
+
+
+

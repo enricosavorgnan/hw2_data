@@ -46,10 +46,10 @@ mark_vars = houses[, mark_cols]
 
 # Funzione helper per printare tutti i dati che mi servono
 cont_info = function (x, i) {
-  if (colnames(quant_cont_vars[i]) != "LotFrontage" & colnames(quant_cont_vars[i]) != "LotArea") {
+  if (colnames(variabili_quant_cont[i]) != "LotFrontage" & colnames(houses[i]) != "LotArea") {
     x = x[x != 0]
   }
-  print(colnames(quant_cont_vars[i]))
+  print(colnames(variabili_quant_cont[i]))
   print(summary(x))
   print("Skewness")
   print(skewness(x, na.rm = TRUE))
@@ -60,27 +60,28 @@ cont_info = function (x, i) {
   plot(density(x, na.rm = T), main="Frequency", xlab = "Frequency", ylab = "Frequency")
   qqnorm(x, main = "QQ Plot")
   qqline(x)
-  mtext(text=colnames(quant_cont_vars[i]), line = -1.75, outer = T, cex = 1.5)
+  mtext(text=colnames(variabili_quant_cont[i]), line = -1.75, outer = T, cex = 1.5)
 }
 
 # Applico la funzione a tutte le variabili numeriche continue
-for (i in seq_along(quant_cont_vars)) {
-  cont_info(quant_cont_vars[, i], i)
+for (i in seq_along(variabili_quant_cont)) {
+  cont_info(variabili_quant_cont[, i], i)
 }
+
 
 ## Variabili numeriche discrete
 
 # Funzione helper per printare tutti i dati che mi servono
 disc_info = function(x, i) {
-  print(colnames(quant_discr_vars[i]))
+  print(colnames(variabili_quant_discrete[i]))
   print(summary(x, na.rm = T))
   par(mfrow = (c(1, 1)))
-  barplot(prop.table(table(x)), main = colnames(quant_discr_vars[i]), xlab = "Value", ylab = "Frequency")
+  barplot(prop.table(table(x)), main = colnames(variabili_quant_discrete[i]), xlab = "Value", ylab = "Frequency")
 }
 
 # Applico la funzione a tutte le variabili numeriche discrete
-for (i in seq_along(quant_discr_vars)) {
-  disc_info(quant_discr_vars[, i], i)
+for (i in seq_along(variabili_quant_discrete)) {
+  disc_info(variabili_quant_discrete[, i], i)
 }
 
 
@@ -90,39 +91,32 @@ for (i in seq_along(quant_discr_vars)) {
 
 year_info = function(x, i) {
   par(mfrow = (c(1, 1)))
-  print("Minimo")
-  print(min(x, na.rm=T))
-  print("Massimo")
-  print(max(x, na.rm=T))
-  print("Quantili")
+  print(paste("Minimo: ", min(x, na.rm=T)))
+  print(paste("Massimo: ", max(x, na.rm=T)))
   print(quantile(x, na.rm=T))
-  hist(x, main = colnames(year_vars[i]), xlab = "Value", ylab = "Frequency")
+  hist(x, main = colnames(anni[i]), xlab = "Value", ylab = "Frequency")
 }
 
-for (i in seq_along(year_vars)) {
-  year_info(year_vars[, i], i)
+for (i in seq_along(anni)) {
+  year_info(anni[, i], i)
 }
 
 
 
 ## Variabili voto
 
-mark_info = function(x, i) {
+voto_info = function(x, i) {
   par(mfrow = (c(1, 1)))
-  print(colnames(mark_vars[i]))
-  print("Minimo")
-  print(min(x, na.rm=T))
-  print("Massimo")
-  print(max(x, na.rm=T))
-  print("Quantili")
+  print(colnames(voti[i]))
+  print(paste("Minimo: ", min(x, na.rm=T)))
+  print(paste("Massimo: ", max(x, na.rm=T)))
   print(quantile(x, na.rm=T))
-  barplot(prop.table(table(x)), main = colnames(mark_vars[i]), xlab = "Value", ylab = "Frequency")
+  barplot(prop.table(table(x)), main = colnames(voti[i]), xlab = "Value", ylab = "Frequency")
 }
 
-for (i in seq_along(mark_vars)) {
-  mark_info(mark_vars[, i], i)
+for (i in seq_along(voti)) {
+  voto_info(voti[, i], i)
 }
-
 
 
 
@@ -130,19 +124,18 @@ for (i in seq_along(mark_vars)) {
 ## Variabili categoriche
 
 # Funzione helper per printare tutti i dati che mi servono
-qual_info = function (x, i) {
-  print(colnames(quant_cont_vars[i]))
-  print(table(x))
-  print(prop.table(table(x)))
+cat_info = function (x, i) {
+  tab = table(x)
+  print(tab)
+  print(prop.table(tab))
   par(mfrow = (c(1, 2)))
-  barplot(table(x), main = "Frequenze assolute", xlab = "Value", ylab = "Frequenze")
-  barplot(prop.table(table(x)), main = "Frequenze relative", xlab = "Value", ylab = "Frequenze")
-  mtext(text=colnames(quant_cont_vars[i]), line = -1.75, outer = T, cex = 1.5)
+  barplot(table(x), main = colnames(variabili_qualitative[i]), xlab = "Value", ylab = "Frequency")
+  barplot(prop.table(table(x)), main = colnames(variabili_qualitative[i]), xlab = "Value", ylab = "Frequency")
 }
 
 # Applico la funzione a tutte le variabili categoriche
-for (i in seq_along(qual_vars)) {
-  qual_info(qual_vars[, i], i)
+for (i in seq_along(variabili_qualitative)) {
+  cat_info(variabili_qualitative[, i], i)
 }
 
 
@@ -162,26 +155,26 @@ par(mfrow = c(1, 1))
 biv_cat = function(a, i){
   print(colnames(qual_vars)[i])
   boxplot(log(houses$SalePrice) ~ a, main = c("Prezzo e ", colnames(qual_vars)[i]), xlab= colnames(qual_vars)[i], ylab="Prezzo")
-  plot(ecdf(houses$SalePrice[a == levels(a)[1]]), xlab="Prezzo", ylab="Frequenza", verticals=T, main="funzione empirica")
-
+  plot(ecdf(houses$SalePrice[a == levels(a)[1]]), xlab=colnames(qual_vars)[i], ylab="Prezzo", verticals=T, main="funzione empirica")
+  
   for (j in 2: nlevels(a)){
     if (sum(houses$SalePrice[a == levels(a)[j]], na.rm=T)>0)
       plot(ecdf(houses$SalePrice[a == levels(a)[j]]), verticals=T, add=T, col= j)
   }
-  legend("topright", inset=c(0,0.1), legend = levels(a), col = 1:nlevels(a), lty = 1, cex=0.35)
-
+  legend("topright", inset=c(0,0.1),legend = c(levels(a)), col = c(1:nlevels(a)), lty = 1, cex=0.35)
+  
   p3 <- ggplot(houses, aes(x = a, y = SalePrice)) +
     geom_violin() +
     labs(title = paste("Prezzo e ", colnames(qual_vars)[i]), x = colnames(qual_vars)[i], y = "Prezzo")
-
+  
   print(p3)
   testanova<- aov(SalePrice ~ a, data=houses)
   print(summary(testanova))
-
+  
 }
 
 
-for (i in 1:seq_along(qual_vars)){
+for (i in 1:length(qual_vars)){
   biv_cat(houses[,colnames(qual_vars)[i]],i)
 }
 
